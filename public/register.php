@@ -2,12 +2,20 @@
   require_once('../private/initialize.php');
 
   // Set default values for all variables the page needs.
+  $first_name = "";
+  $last_name = "";
+  $email = "";
+  $username = "";
+  $errors = array();
 
   // if this is a POST request, process the form
   // Hint: private/functions.php can help
-
+  if(is_post_request()) {
     // Confirm that POST values are present before accessing them.
-
+    $first_name = $_POST['first_name'] ?? "";
+    $last_name = $_POST['last_name'] ?? "";
+    $email = $_POST['email'] ?? "";
+    $username = $_POST['username'] ?? "";
     // Perform Validations
     // Hint: Write these in private/validation_functions.php
 
@@ -30,7 +38,7 @@
       //   db_close($db);
       //   exit;
       // }
-
+    }
 ?>
 
 <?php $page_title = 'Register'; ?>
@@ -47,14 +55,14 @@
 
   <form action="" method="POST">
     First Name:<br>
-    <input type="text" name="firstName"><br>
+    <input type="text" name="first_name" value="<?php echo $first_name; ?>"><br>
     Last Name:<br>
-    <input type="text" name="lastName"><br>
+    <input type="text" name="last_name" value="<?php echo $last_name; ?>"><br>
     Email:<br>
-    <input type="text" name="email"><br>
+    <input type="text" name="email" value="<?php echo $email; ?>"><br>
     Username:<br>
-    <input type="text" name="username"><br><br>
-    <input type="submit" value="Submit">
+    <input type="text" name="username" value="<?php echo $username; ?>"><br><br>
+    <input type="submit" name="submit" value="Submit">
   </form>
 
 </div>
