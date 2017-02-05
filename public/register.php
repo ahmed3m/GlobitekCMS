@@ -45,7 +45,17 @@
     // Hint: private/functions.php can help
   ?>
 
-  <!-- TODO: HTML form goes here -->
+  <form action="" method="POST">
+    First Name:<br>
+    <input type="text" name="firstName"><br>
+    Last Name:<br>
+    <input type="text" name="lastName"><br>
+    Email:<br>
+    <input type="text" name="email"><br>
+    Username:<br>
+    <input type="text" name="username"><br><br>
+    <input type="submit" value="Submit">
+  </form>
 
 </div>
 
