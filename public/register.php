@@ -73,8 +73,7 @@
   <p>Register to become a Globitek Partner.</p>
 
   <?php
-    // TODO: display any form errors here
-    // Hint: private/functions.php can help
+    echo display_errors($errors);
   ?>
 
   <form action="" method="POST">
