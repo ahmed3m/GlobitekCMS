@@ -48,7 +48,7 @@ The following **required** functionality is completed:
 
 The following advanced user stories are optional:
 
-* [ ]  Bonus 1: Validate that form values contain only whitelisted characters.
+* [X]  Bonus 1: Validate that form values contain only whitelisted characters.
 
 * [X]  Bonus 2: Validate the uniqueness of the username.
 
@@ -57,7 +57,7 @@ The following advanced user stories are optional:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/tAuePZB.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/LvoE4Ib.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
