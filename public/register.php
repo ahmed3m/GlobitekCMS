@@ -21,28 +21,36 @@
     // validating the first name
     if (is_blank($first_name)) {
       $errors[] = "First name cannot be blank.";
+    } elseif(!preg_match('/\A[A-Za-z\s\-,\.\']+\Z/', $first_name)) {
+      $errors[] = "First name can only contain letters, spaces, and the following symbols: - , . '";
     } elseif (!has_length($first_name, ['min' => 2, 'max' => 255])) {
       $errors[] = "First name must be between 2 and 255 characters.";
     }
     // validating the last name
     if (is_blank($last_name)) {
       $errors[] = "Last name cannot be blank.";
+    } elseif(!preg_match('/\A[A-Za-z\s\-,\.\']+\Z/', $last_name)) {
+      $errors[] = "Last name can only contain letters, spaces, and the following symbols: - , . '";
     } elseif (!has_length($last_name, ['min' => 2, 'max' => 255])) {
       $errors[] = "Last name must be between 2 and 255 characters.";
     }
     // validating the email
     if (is_blank($email) || !has_valid_email_format($email)) {
       $errors[] = "Please use a valid email.";
+    } elseif (!preg_match('/\A[A-Za-z0-9\_\@\.]+\Z/', $email)) {
+      $errors[] = "Email can only contain letters, numbers, and the following symbols: _ @ .";
     } elseif (!has_length($email, ['min' => 3, 'max' => 255])) {
       $errors[] = "Email must be between 3 and 255 characters.";
     }
     // validating the username
     $sql = "SELECT username FROM users WHERE username='{$username}';";
     $result = db_query($db, $sql);
-    if(db_num_rows($result)) {
+    if(db_num_rows($result)) { // returns true if username exists/number of rows > 0
       $errors[] = "Username already exists.";
     } elseif (is_blank($username)) {
       $errors[] = "Username cannot be blank.";
+    } elseif (!preg_match('/\A[A-Za-z0-9\_]+\Z/', $username)) {
+      $errors[] = "Username can only contain letters, numbers, and the following symbol: _";
     } elseif (!has_length($username, ['min' => 8, 'max' => 255])) {
       $errors[] = "Username must be between 8 and 255 characters.";
     }
@@ -50,9 +58,12 @@
     // if there were no errors, submit data to database
     if(empty($errors)) {
       // Write SQL INSERT statement
+      // ensure first and last name have escape characters for quotations
+      $sql_first_name = db_escape($db, $first_name);
+      $sql_last_name = db_escape($db, $last_name);
       $date = date("Y-m-d H:i:s");
       $sql = "INSERT INTO users (first_name, last_name, email, username, created_at) ";
-      $sql .= "VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$username}', '{$date}');";
+      $sql .= "VALUES ('{$sql_first_name}', '{$sql_last_name}', '{$email}', '{$username}', '{$date}');";
 
       // For INSERT statments, $result is just true/false
       $result = db_query($db, $sql);
