@@ -54,9 +54,7 @@
       $result = db_query($db, $sql);
       if($result) {
         db_close($db);
-
-      //   TODO redirect user to success page
-
+        redirect_to("registration_success.php");
       } else {
         // The SQL INSERT statement failed.
         // Just show the error, not the form
