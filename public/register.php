@@ -37,7 +37,11 @@
       $errors[] = "Email must be between 3 and 255 characters.";
     }
     // validating the username
-    if (is_blank($username)) {
+    $sql = "SELECT username FROM users WHERE username='{$username}';";
+    $result = db_query($db, $sql);
+    if(db_num_rows($result)) {
+      $errors[] = "Username already exists.";
+    } elseif (is_blank($username)) {
       $errors[] = "Username cannot be blank.";
     } elseif (!has_length($username, ['min' => 8, 'max' => 255])) {
       $errors[] = "Username must be between 8 and 255 characters.";
