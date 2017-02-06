@@ -44,25 +44,28 @@
     }
 
     // if there were no errors, submit data to database
-
+    if(empty($errors)) {
       // Write SQL INSERT statement
-      // $sql = "";
+      $sql = "INSERT INTO users (first_name, last_name, email, username, created_at) ";
+      $sql .= "VALUES ('" . $first_name . "', '" . $last_name . "', '" . $email . "', '";
+      $sql .= $username . "', '" . date("Y-m-d H:i:s") . "');";
 
       // For INSERT statments, $result is just true/false
-      // $result = db_query($db, $sql);
-      // if($result) {
-      //   db_close($db);
+      $result = db_query($db, $sql);
+      if($result) {
+        db_close($db);
 
       //   TODO redirect user to success page
 
-      // } else {
-      //   // The SQL INSERT statement failed.
-      //   // Just show the error, not the form
-      //   echo db_error($db);
-      //   db_close($db);
-      //   exit;
-      // }
+      } else {
+        // The SQL INSERT statement failed.
+        // Just show the error, not the form
+        echo db_error($db);
+        db_close($db);
+        exit;
+      }
     }
+  }
 ?>
 
 <?php $page_title = 'Register'; ?>
