@@ -46,9 +46,9 @@
     // if there were no errors, submit data to database
     if(empty($errors)) {
       // Write SQL INSERT statement
+      $date = date("Y-m-d H:i:s");
       $sql = "INSERT INTO users (first_name, last_name, email, username, created_at) ";
-      $sql .= "VALUES ('" . $first_name . "', '" . $last_name . "', '" . $email . "', '";
-      $sql .= $username . "', '" . date("Y-m-d H:i:s") . "');";
+      $sql .= "VALUES ('{$first_name}', '{$last_name}', '{$email}', '{$username}', '{$date}');";
 
       // For INSERT statments, $result is just true/false
       $result = db_query($db, $sql);
@@ -79,13 +79,13 @@
 
   <form action="" method="POST">
     First Name:<br>
-    <input type="text" name="first_name" value="<?php echo $first_name; ?>"><br>
+    <input type="text" name="first_name" value="<?php echo h($first_name); ?>"><br>
     Last Name:<br>
-    <input type="text" name="last_name" value="<?php echo $last_name; ?>"><br>
+    <input type="text" name="last_name" value="<?php echo h($last_name); ?>"><br>
     Email:<br>
-    <input type="text" name="email" value="<?php echo $email; ?>"><br>
+    <input type="text" name="email" value="<?php echo h($email); ?>"><br>
     Username:<br>
-    <input type="text" name="username" value="<?php echo $username; ?>"><br><br>
+    <input type="text" name="username" value="<?php echo h($username); ?>"><br><br>
     <input type="submit" name="submit" value="Submit">
   </form>
 
